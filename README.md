@@ -24,4 +24,4 @@ Jump start to VueJS
 
 ## Lesson 05
 - Event handling
-- 
+- Methods in Vue's configuration object
