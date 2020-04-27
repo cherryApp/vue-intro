@@ -17,12 +17,26 @@
                 <button class="btn btn-primary" :disabled="newItem.length === 0" @click="saveItem">Save Item</button>
             </div>
             <ul>
-                <li v-for="item in reversedItems" :class="{strikeout: item.purchased}" @click="togglePurchased(item)">{{ item.label }}</li>
+                <!-- <li v-for="item in reversedItems" :class="{strikeout: item.purchased}" @click="togglePurchased(item)">{{ item.label }}</li> -->
+                <item v-for="item in reversedItems" :product="item"></item>
             </ul>
             <p v-if="items.length === 0">Nice job! You've bought all your items.</p>
         </div>
         <script src="https://unpkg.com/vue"></script>
         <script>
+            // Product component.
+            Vue.component('item', {
+                props: ['product'],
+                template: `<li :class="{strikeout: product.purchased}" @click="togglePurchased(product)">
+                    {{ product.label }}
+                </li>`,
+                methods: {
+                    togglePurchased: function(item) {
+                        item.purchased = !item.purchased;
+                    }
+                }
+            })
+            
             var shoppingList = new Vue({
                 el: '#shopping-list',
                 data: {
@@ -69,6 +83,7 @@
                     }
                 }
             })
+
         </script>
     </body>
 </html>
